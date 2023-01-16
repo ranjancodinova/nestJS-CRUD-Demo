@@ -1,32 +1,28 @@
 import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { CreateUserDto } from './auth.dto';
+import { User, UserDocument } from './auth.schema';
 import { ICredential, IErrorResponse, IUser } from './auth.types';
 
 @Injectable()
 export class AuthService {
+  constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
+
   users: IUser[]=[];
-  getLoggedInUser() {
-    return {
-      id: '1',
-      username: 'ranjan12',
-      email: 'ranjan12@gmail.com',
-    };
+  async getLoggedInUser(_id:string):Promise<User> {
+    return await this.userModel.findOne({_id:_id}).exec()
   }
 
-  userLogin(credential:ICredential) {
-    const user = this.users.filter(
-      (user) => user.email === credential.email && user.password === credential.password,
-    );
-    if (user.length) {
-      return user;
+ async userLogin(credential:ICredential):Promise<User|string> {
+    const userExist= await this.userModel.findOne({email:credential.email}).exec();
+    if(userExist){
+      return await this.userModel.findOne({password:credential.password}).exec();
     }
-    return {
-      status: 401,
-      message: 'Invalid credential',
-    };
+    return "User does not exist with this email/userId";
   }
 
-  userSignUp(user: IUser) {
-    this.users.push(user);
-    return user;
+ async userSignUp(createUserDto: CreateUserDto):Promise<User> {
+    return await new this.userModel(createUserDto).save();
   }
 }

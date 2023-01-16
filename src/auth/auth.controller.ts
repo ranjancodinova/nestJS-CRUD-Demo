@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, ParamData, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { ICredential, IUser } from './auth.types';
 
@@ -6,9 +6,9 @@ import { ICredential, IUser } from './auth.types';
 export class AuthController {
   constructor(private authService: AuthService) {}
 
-  @Get('user')
-  getLoggedInUser() {
-    return this.authService.getLoggedInUser();
+  @Get(':_id')
+  getLoggedInUser(@Param() params:any) {
+    return this.authService.getLoggedInUser(params?._id);
   }
   @Post('login')
   userLogin(@Body() credential:ICredential) {
