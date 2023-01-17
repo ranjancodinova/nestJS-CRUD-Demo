@@ -1,6 +1,7 @@
-import { Body, Controller, Get, Param, ParamData, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, ParamData, Post, UsePipes, ValidationPipe } from '@nestjs/common';
+import { CreateUserDto } from './auth.dto';
 import { AuthService } from './auth.service';
-import { ICredential, IUser } from './auth.types';
+import { ICredential } from './auth.types';
 
 @Controller('auth')
 export class AuthController {
@@ -15,7 +16,8 @@ export class AuthController {
     return this.authService.userLogin(credential);
   }
   @Post('signup')
-  userSignUp(@Body() user:IUser) {
+  @UsePipes(ValidationPipe)
+  userSignUp(@Body() user:CreateUserDto) {
     return this.authService.userSignUp(user);
   }
 }

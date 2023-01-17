@@ -12,6 +12,7 @@ export interface IHotel {
   coordinates: ICoordinates;
   email: string;
   phone: string;
+  countryCode:string;
 }
 
 export interface ILocation {
