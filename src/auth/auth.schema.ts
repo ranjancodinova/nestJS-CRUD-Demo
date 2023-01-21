@@ -19,6 +19,9 @@ export class User {
 
   @Prop()
   password: string;
+  
+  @Prop()
+  access_token: string;
 
 }
 

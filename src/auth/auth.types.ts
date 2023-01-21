@@ -4,6 +4,7 @@ export interface IUser {
   username: string;
   email: string;
   password:string;
+  access_token:string;
 }
 export interface ICredential {
   email: string;
