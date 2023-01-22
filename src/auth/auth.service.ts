@@ -22,7 +22,6 @@ export class AuthService {
     return null;
   }
 
-  users: IUser[] = [];
   async getLoggedInUser(_id: string): Promise<User> {
     return await this.userModel.findOne({ _id: _id }).exec();
   }

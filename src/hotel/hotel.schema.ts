@@ -13,31 +13,31 @@ class Coordinates {
 
 @Schema({ timestamps: true })
 export class Hotel {
-  @Prop()
+  @Prop({ isRequired: true })
   hotelName: string;
 
-  @Prop()
+  @Prop({ isRequired: true })
   description: string;
 
-  @Prop()
+  @Prop({ isRequired: true })
   owner: string;
 
-  @Prop()
+  @Prop({ isRequired: true })
   city: string;
 
-  @Prop()
+  @Prop({ isRequired: true })
   address: string;
 
-  @Prop()
+  @Prop({ isRequired: true })
   coordinates: Coordinates;
 
-  @Prop()
+  @Prop({ isRequired: true })
   email: string;
 
-  @Prop()
+  @Prop({ isRequired: true })
   phone: string;
 
-  @Prop()
+  @Prop({ isRequired: true })
   countryCode: string;
 }
 
