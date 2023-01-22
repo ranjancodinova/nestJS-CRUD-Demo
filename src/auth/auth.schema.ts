@@ -3,7 +3,7 @@ import { HydratedDocument } from 'mongoose';
 
 export type UserDocument = HydratedDocument<User>;
 
-@Schema()
+@Schema({ timestamps: true })
 export class User {
   @Prop()
   firstName: string;
@@ -19,10 +19,9 @@ export class User {
 
   @Prop()
   password: string;
-  
+
   @Prop()
   access_token: string;
-
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

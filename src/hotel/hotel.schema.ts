@@ -11,7 +11,7 @@ class Coordinates {
   longitude: number;
 }
 
-@Schema()
+@Schema({ timestamps: true })
 export class Hotel {
   @Prop()
   hotelName: string;
@@ -36,6 +36,9 @@ export class Hotel {
 
   @Prop()
   phone: string;
+
+  @Prop()
+  countryCode: string;
 }
 
 export const HotelSchema = SchemaFactory.createForClass(Hotel);
